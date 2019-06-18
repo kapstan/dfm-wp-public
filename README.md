@@ -5,7 +5,7 @@ Technical Exercise
 1. Set up a local WordPress development environment using VVV (https://github.com/Varying-Vagrant-Vagrants/VVV), MAMP, or any other local development setup you prefer.
 2. Fork the DFM WP Public repo here: https://github.com/dfmedia/dfm-wp-public
 3. Clone the fork into the plugins folder of your local WordPress environment
-4. Add functionality to the plugin as outlined below. When you're finished, create a pull request back to the dfmedia repo and let us know.
+4. Add functionality to the plugin as outlined below. When you're finished send us a link to your github repo with the branch with your work.
 
 Notes:
 

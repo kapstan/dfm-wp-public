@@ -1,5 +1,7 @@
 <?php
 /**
+ * DFM Wordpress Plugin.
+ *
  * @link http://www.digitalfirstmedia.com
  * @since 1.0.0
  * @package DFM_WP_Public
@@ -15,26 +17,35 @@
  * Domain Path: /languages
  */
 
+declare( strict_types = 1 );
+
+namespace DFM;
+
+use DFM\Includes;
+
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
+if ( ! defined( 'WPINC' ) ) :
 	die;
-}
+endif;
 
 /**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
+ * Include autoloader and define action to kick off plugin operation.
  */
-require_once plugin_dir_path( __FILE__ ) . 'includes/class-dfm-wp-public.php';
+require_once plugin_dir_path( __FILE__ ) . 'lib/autoloader.php';
+add_action( 'plugins_loaded', __NAMESPACE__ . '\\dfm_wp_public_init' );
 
 /**
- * Begins execution of the plugin.
+ * Register activation & deactivation hooks
+ */
+register_activation_hook( __FILE__, array( 'DFM\\Includes\\DFM_WP_Public_Activator', 'activate' ) );
+
+/**
+ * Instantiates each class defined in the autoloader.
  *
  * @since 1.0.0
+ * @author Ian Kaplan <ian.c.kaplan@protonmail.com>
  */
-function run_dfm_wp_public() {
-
-	$plugin = new DFM_WP_Public( __FILE__ );
+function dfm_wp_public_init() {
+	$plugin = new Includes\DFM_WP_Public( __FILE__ );
 	$plugin->run();
-
 }
-run_dfm_wp_public();

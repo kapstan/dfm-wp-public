@@ -25,16 +25,17 @@ namespace DFM\Lib;
 spl_autoload_register(
 	function( $file_name ) {
 		$file_path = explode( '\\', $file_name );
+		$lim = count( $file_path ) - 1;
 
-		if ( isset( $file_path[ count( $file_path ) - 1 ] ) ) :
-			$class_file = strtolower( $file_path[ count( $file_path ) - 1 ] );
+		if ( isset( $file_path[ $lim ] ) ) :
+			$class_file = strtolower( $file_path[ $lim ] );
 			$class_file = str_ireplace( '_', '-', $class_file );
 			$class_file = "class-$class_file.php";
 		endif;
 
 		$fq_path = trailingslashit( dirname( dirname( __FILE__ ) ) );
 
-		for ( $i = 1; $i < count( $file_path ) - 1; $i++ ) :
+		for ( $i = 1; $i < $lim; $i++ ) :
 			$dir      = strtolower( $file_path[ $i ] );
 			$fq_path .= trailingslashit( $dir );
 		endfor;
@@ -42,7 +43,7 @@ spl_autoload_register(
 		$fq_path .= $class_file;
 
 		if ( file_exists( $fq_path ) ) :
-			include_once( $fq_path );
+			include_once $fq_path;
 		endif;
 	}
 );
